@@ -1,7 +1,7 @@
 class Geocode {
-    constructor(object) {
-        Object.assign(this,object);
-    }
+  constructor (object) {
+    Object.assign(this, object)
+  }
 }
 
-module.exports = Geocode;
+module.exports = Geocode

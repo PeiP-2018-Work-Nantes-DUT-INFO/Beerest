@@ -1,7 +1,7 @@
 class Categorie {
-    constructor(object) {
-        Object.assign(this,object);
-    }
+  constructor (object) {
+    Object.assign(this, object)
+  }
 }
 
-module.exports = Categorie;
+module.exports = Categorie

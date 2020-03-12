@@ -1,7 +1,7 @@
 class Beer {
-    constructor(object) {
-        Object.assign(this,object);
-    }
+  constructor (object) {
+    Object.assign(this, object)
+  }
 }
 
-module.exports = Beer;
+module.exports = Beer
