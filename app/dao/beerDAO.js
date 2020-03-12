@@ -13,9 +13,7 @@ class BeerDAO {
     return this.common.findAll(sqlRequest)
       .then(rows => {
         const beers = rows.map(row => new Beer(row))
-        return beers
-      })
-      .catch(err => console.log(err))
+        return beersvalidationResultconsole.log(err))
   };
 
   findById (id) {
@@ -26,16 +24,53 @@ class BeerDAO {
       .then(row => new Beer(row))
   };
 
-  findByAlcoholOverDeg (deg) {
-    const sqlRequest = 'SELECT * FROM beer where alcohol_by_volume >= $deg '
-    const sqlParams = { $deg: deg }
-    return this.common.findAllWithParams(sqlRequest, sqlParams)
+  /**
+   * 
+   * @param {Object} params 
+   */
+  search (params) {
+    let limit = ''
+    let offset = ''
+    let orderBy = ''
+    let where = ' WHERE'
+
+    for (const param in params) {
+      console.log(`${param}: ${params[param]}`);
+      if (where != ' WHERE') {
+        where += ' AND'
+      }
+      switch (param) {
+        case 'degAbove':
+          where += ' alcohol_by_volume > '+params[param]
+          break;
+        case 'degBelow':
+          where += ' alcohol_by_volume < '+params[param]
+          break;
+        case 'limit':
+          limit = ' LIMIT '+params[param]
+          break;
+        case 'orderBy':
+          orderBy = ' ORDER BY '+params[param]
+          break;
+        case 'page':
+          if (limit) {
+            offset = ' OFFSET '+params[param]*parseInt(params.limit)
+          }
+          break;
+        }
+    }
+
+    
+    const sqlRequest = 'SELECT * FROM beer'+((where)==' WHERE'?'':where)+orderBy+limit+(limit?offset:'')
+    console.log(sqlRequest)
+
+    return this.common.findAll(sqlRequest)
       .then(rows => {
         const beers = rows.map(row => new Beer(row))
         return beers
       })
       .catch(err => console.log(err))
-  }
+  };
 }
 
 module.exports = BeerDAO

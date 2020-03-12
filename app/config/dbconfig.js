@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose()
 const fs = require('fs')
 const parse = require('csv-parse')
 
-const dbName = 'beerdb.db' // dbName = ':memory:'; //Pour travailler en mémoirec
+const dbName = ':memory:' // dbName = ':memory:'; //Pour travailler en mémoirec
 // const dbName =  ':memory:';
 
 const createDataBase = () => new Promise((resolve, reject) => {

@@ -36,6 +36,13 @@ class controllerCommon {
       res.json(error)
     }
   }
+
+  validationError (res) {
+    return (error) => {
+      res.status(412) // Precondition Failed
+      res.json(error)
+    }
+  }
 }
 
 module.exports = controllerCommon

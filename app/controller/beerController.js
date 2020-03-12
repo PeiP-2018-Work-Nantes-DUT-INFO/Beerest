@@ -1,6 +1,8 @@
 const BeerDAO = require('../dao/beerDAO')
 const Beer = require('../model/beer')
 
+const { validationResult } = require('express-validator');
+
 /* Load Controller Common function */
 const ControllerCommon = require('./common/controllerCommon')
 
@@ -23,11 +25,15 @@ class BeerController {
       .catch(this.common.findError(res))
   };
 
-  findByAlcoholOverDeg (req, res) {
-    const deg = req.params.deg
-    this.beerDAO.findByAlcoholOverDeg(deg)
+  search (req, res) {
+    const errors = validationResult(req);
+    this.beerDAO.search(req.query)
       .then(this.common.findSuccess(res))
-      .catch(this.common.findError(res))
+      .catch((error) => {
+        res.status(412) // Precondition Failed
+        res.json(error)
+      }
+    )
   }
 }
 
