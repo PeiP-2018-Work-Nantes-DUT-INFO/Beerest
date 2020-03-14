@@ -26,14 +26,19 @@ class BeerController {
   };
 
   search (req, res) {
+    console.log('======SEARCH======')
+    console.log(req.query)
     const errors = validationResult(req);
-    this.beerDAO.search(req.query)
-      .then(this.common.findSuccess(res))
-      .catch((error) => {
-        res.status(412) // Precondition Failed
-        res.json(error)
-      }
-    )
+    // console.log(errors.errors.length)
+
+    if (errors.errors.length == 0) {
+      this.beerDAO.search(req.query)
+        .then(this.common.findSuccess(res))
+        .catch(this.common.findError(res))
+    } else {
+      this.common.validationError(res)(errors)
+    }
+    console.log('====END=SEARCH====')
   }
 }
 

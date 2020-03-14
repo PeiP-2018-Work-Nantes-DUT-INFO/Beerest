@@ -13,7 +13,8 @@ class BeerDAO {
     return this.common.findAll(sqlRequest)
       .then(rows => {
         const beers = rows.map(row => new Beer(row))
-        return beersvalidationResultconsole.log(err))
+        return beers
+      })
   };
 
   findById (id) {
@@ -33,28 +34,41 @@ class BeerDAO {
     let offset = ''
     let orderBy = ''
     let where = ' WHERE'
+    let sqlParams_limit = []
+    let sqlParams_offset = []
+    let sqlParams_orderBy = []
+    let sqlParams_where = []
 
     for (const param in params) {
-      console.log(`${param}: ${params[param]}`);
-      if (where != ' WHERE') {
-        where += ' AND'
-      }
+      // console.log(`${param}: ${params[param]}`);
+      
       switch (param) {
         case 'degAbove':
-          where += ' alcohol_by_volume > '+params[param]
+          if (where != ' WHERE') {
+            where += ' AND'
+          }
+          where += ' alcohol_by_volume > ?'
+          sqlParams_where.push(params[param])
           break;
         case 'degBelow':
-          where += ' alcohol_by_volume < '+params[param]
+          if (where != ' WHERE') {
+            where += ' AND'
+          }
+          where += ' alcohol_by_volume < ?'
+          sqlParams_where.push(params[param])
           break;
         case 'limit':
-          limit = ' LIMIT '+params[param]
+          limit = ' LIMIT ?'
+          sqlParams_limit.push(params[param])
           break;
         case 'orderBy':
-          orderBy = ' ORDER BY '+params[param]
+          orderBy = ' ORDER BY ?'
+          sqlParams_orderBy.push(params[param])
           break;
         case 'page':
           if (limit) {
-            offset = ' OFFSET '+params[param]*parseInt(params.limit)
+            offset = ' OFFSET ?'
+            sqlParams_offset.push(params[param]*params.limit)
           }
           break;
         }
@@ -62,14 +76,19 @@ class BeerDAO {
 
     
     const sqlRequest = 'SELECT * FROM beer'+((where)==' WHERE'?'':where)+orderBy+limit+(limit?offset:'')
+    const sqlParams = sqlParams_where.concat(sqlParams_orderBy.concat(sqlParams_limit.concat(sqlParams_offset)))
     console.log(sqlRequest)
+    console.log(sqlParams)
 
-    return this.common.findAll(sqlRequest)
+    return this.common.findAllWithParams(sqlRequest, sqlParams)
       .then(rows => {
         const beers = rows.map(row => new Beer(row))
         return beers
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        return err
+      })
   };
 }
 

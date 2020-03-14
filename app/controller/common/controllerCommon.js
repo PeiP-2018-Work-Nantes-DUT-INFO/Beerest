@@ -40,7 +40,7 @@ class controllerCommon {
   validationError (res) {
     return (error) => {
       res.status(412) // Precondition Failed
-      res.json(error)
+      res.json({ errors: error.array() })
     }
   }
 }
