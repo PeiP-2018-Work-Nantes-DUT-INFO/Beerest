@@ -25,11 +25,24 @@ class BeerController {
       .catch(this.common.findError(res))
   };
 
+  findByBreweryId (req, res) {
+    const brewery_id = req.params.brewery_id
+    this.beerDAO.findByBreweryId(brewery_id)
+      .then(this.common.findSuccess(res))
+      .catch(this.common.findError(res))
+  };
+
+  findByCatId (req, res) {
+    const cat_id = req.params.cat_id
+    this.beerDAO.findByBreweryId(cat_id)
+      .then(this.common.findSuccess(res))
+      .catch(this.common.findError(res))
+  };
+
   search (req, res) {
-    console.log('======SEARCH======')
-    console.log(req.query)
+    console.log('\n======SEARCH======')
+    console.log('Input parameters: \t',req.query)
     const errors = validationResult(req);
-    // console.log(errors.errors.length)
 
     if (errors.errors.length == 0) {
       this.beerDAO.search(req.query)

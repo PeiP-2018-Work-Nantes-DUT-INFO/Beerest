@@ -1,4 +1,18 @@
 module.exports = {
+    city: {
+      in: ['query'],
+      optional: { 
+        options: { nullable: true }
+      },
+      isAlphanumeric: true
+    },
+    country: {
+      in: ['query'],
+      optional: { 
+        options: { nullable: true }
+      },
+      isAlphanumeric: true
+    },
     degAbove: {
       in: ['query'],
       optional: { 
@@ -6,7 +20,7 @@ module.exports = {
       },
       isFloat: {
         options: {
-          isInt: true,
+          isFloat: true,
           min: 0,
           max: 100
         }
@@ -20,7 +34,7 @@ module.exports = {
       },
       isFloat: {
         options: {
-          isInt: true,
+          isFloat: true,
           min: 0,
           max: 100
         }
@@ -51,6 +65,10 @@ module.exports = {
           min: 0
         }
       },
-      toInt: true
+      toInt: true,
+      custom: {
+        errorMessage: 'Limit parameter is required',
+        options: (value, { req }) => !!req.query.limit
+      },
     }
   }

@@ -20,8 +20,21 @@ class BeerDAO {
   findById (id) {
     const sqlRequest = 'SELECT * FROM beer WHERE id=$id'
     const sqlParams = { $id: id }
-    // console.log(sqlParams);
     return this.common.findOne(sqlRequest, sqlParams)
+      .then(row => new Beer(row))
+  };
+
+  findByBreweryId (brewery_id) {
+    const sqlRequest = 'SELECT * FROM beer WHERE brewery_id = ?'
+    const sqlParams = [brewery_id]
+    return this.common.findAllWithParams(sqlRequest, sqlParams)
+      .then(row => new Beer(row))
+  };
+
+  findByCatId (cat_id) {
+    const sqlRequest = 'SELECT * FROM beer WHERE cat_id = ?'
+    const sqlParams = [cat_id]
+    return this.common.findAllWithParams(sqlRequest, sqlParams)
       .then(row => new Beer(row))
   };
 
@@ -30,55 +43,73 @@ class BeerDAO {
    * @param {Object} params 
    */
   search (params) {
-    let limit = ''
-    let offset = ''
-    let orderBy = ''
-    let where = ' WHERE'
+    let sqlRequest_limit = ''
+    let sqlRequest_offset = ''
+    let sqlRequest_orderBy = ''
+    let sqlRequest_where = ' WHERE'
+
     let sqlParams_limit = []
     let sqlParams_offset = []
     let sqlParams_orderBy = []
     let sqlParams_where = []
 
     for (const param in params) {
-      // console.log(`${param}: ${params[param]}`);
       
       switch (param) {
-        case 'degAbove':
-          if (where != ' WHERE') {
-            where += ' AND'
+        case 'city':
+          if (sqlRequest_where != ' WHERE') {
+            sqlRequest_where += ' AND'
           }
-          where += ' alcohol_by_volume > ?'
+          sqlRequest_where += ' city LIKE ?'
+          sqlParams_where.push('%'+params[param]+'%')
+          break;
+        case 'country':
+          if (sqlRequest_where != ' WHERE') {
+            sqlRequest_where += ' AND'
+          }
+          sqlRequest_where += ' country LIKE ?'
+          sqlParams_where.push('%'+params[param]+'%')
+          break;
+        case 'degAbove':
+          if (sqlRequest_where != ' WHERE') {
+            sqlRequest_where += ' AND'
+          }
+          sqlRequest_where += ' alcohol_by_volume > ?'
           sqlParams_where.push(params[param])
           break;
         case 'degBelow':
-          if (where != ' WHERE') {
-            where += ' AND'
+          if (sqlRequest_where != ' WHERE') {
+            sqlRequest_where += ' AND'
           }
-          where += ' alcohol_by_volume < ?'
+          sqlRequest_where += ' alcohol_by_volume < ?'
           sqlParams_where.push(params[param])
           break;
         case 'limit':
-          limit = ' LIMIT ?'
+          sqlRequest_limit = ' LIMIT ?'
           sqlParams_limit.push(params[param])
           break;
         case 'orderBy':
-          orderBy = ' ORDER BY ?'
+          sqlRequest_orderBy = ' ORDER BY ?'
           sqlParams_orderBy.push(params[param])
           break;
         case 'page':
-          if (limit) {
-            offset = ' OFFSET ?'
+          if (params.limit) {
+            sqlRequest_offset = ' OFFSET ?'
             sqlParams_offset.push(params[param]*params.limit)
           }
           break;
         }
     }
 
-    
-    const sqlRequest = 'SELECT * FROM beer'+((where)==' WHERE'?'':where)+orderBy+limit+(limit?offset:'')
+    const sqlRequest = 'SELECT * FROM beer'+
+      ((sqlRequest_where)==' WHERE'?'':sqlRequest_where)+
+      sqlRequest_orderBy+
+      sqlRequest_limit+
+      (sqlRequest_limit?sqlRequest_offset:'')
     const sqlParams = sqlParams_where.concat(sqlParams_orderBy.concat(sqlParams_limit.concat(sqlParams_offset)))
-    console.log(sqlRequest)
-    console.log(sqlParams)
+    
+    console.log('Input request: \t\t',sqlRequest)
+    console.log('Evaluated Params: \t',sqlParams)
 
     return this.common.findAllWithParams(sqlRequest, sqlParams)
       .then(rows => {
