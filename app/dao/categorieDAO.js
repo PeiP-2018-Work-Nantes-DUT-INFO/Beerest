@@ -1,10 +1,10 @@
 const Categorie = require('../model/categorie')
 
-const daoCommon = require('./commons/daoCommon')
+const DaoCommon = require('./commons/daoCommon')
 
 class CategorieDAO {
   constructor () {
-    this.common = new daoCommon()
+    this.common = new DaoCommon()
   }
 
   findAll () {
