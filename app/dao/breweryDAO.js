@@ -36,20 +36,20 @@ class BreweryDAO {
             'id,breweries,address1,address2,city,state,code,country,phone,website,filepath,descript,last_mod,coordinates) ' +
             'VALUES ($id,$breweries,$address1,$address2,$city,$state,$code,$country,$phone,$website,$filepath,$descript,$lastMod,$coordinates)'
         const sqlParams = {
-            $id: row.id,
-            $breweries: row.breweries,
-            $address1: row.address1,
-            $address2: row.address2,
-            $city: row.city,
-            $state: row.state,
-            $code: row.code,
-            $country: row.country,
-            $phone: row.phone,
-            $website: row.website,
-            $filepath: row.filepath,
-            $descript: row.descript,
-            $lastMod: row.last_mod,
-            $coordinates: row.coordinates
+            $id: brewery.id,
+            $breweries: brewery.breweries,
+            $address1: brewery.address1,
+            $address2: brewery.address2,
+            $city: brewery.city,
+            $state: brewery.state,
+            $code: brewery.code,
+            $country: brewery.country,
+            $phone: brewery.phone,
+            $website: brewery.website,
+            $filepath: brewery.filepath,
+            $descript: brewery.descript,
+            $lastMod: brewery.last_mod,
+            $coordinates: brewery.coordinates
         }
         // console.log(sqlParams, sqlRequest);
         return this.common.run(sqlRequest, sqlParams)
@@ -61,7 +61,7 @@ class BreweryDAO {
         return this.common.run(sqlRequest, sqlParams)
     };
 
-    update (beer) {
+    update (brewery) {
         const sqlRequest = 'UPDATE beer SET ' +
             'id = $id' +
             'breweries = $breweries' +
@@ -80,20 +80,20 @@ class BreweryDAO {
             'WHERE id = $id'
 
         const sqlParams = {
-            $id: row.id,
-            $breweries: row.breweries,
-            $address1: row.address1,
-            $address2: row.address2,
-            $city: row.city,
-            $state: row.state,
-            $code: row.code,
-            $country: row.country,
-            $phone: row.phone,
-            $website: row.website,
-            $filepath: row.filepath,
-            $descript: row.descript,
-            $lastMod: row.last_mod,
-            $coordinates: row.coordinates
+            $id: brewery.id,
+            $breweries: brewery.breweries,
+            $address1: brewery.address1,
+            $address2: brewery.address2,
+            $city: brewery.city,
+            $state: brewery.state,
+            $code: brewery.code,
+            $country: brewery.country,
+            $phone: brewery.phone,
+            $website: brewery.website,
+            $filepath: brewery.filepath,
+            $descript: brewery.descript,
+            $lastMod: brewery.last_mod,
+            $coordinates: brewery.coordinates
         }
         return this.common.run(sqlRequest, sqlParams)
     };
