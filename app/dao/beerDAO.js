@@ -107,9 +107,28 @@ class BeerDAO {
         'WHERE id = $id'
 
     const sqlParams = {
-      $catName: categorie.catName,
-      $lastMod: categorie.lastMod,
-      $id: beer.id
+      $name: row.name,
+      $id: row.id,
+      $breweryId: row.brewery_id,
+      $catId: row.cat_id,
+      $styleId: row.style_id,
+      $alcoholByVolume: row.alcohol_by_volume,
+      $internationalBitternessUnits: row.international_bitterness_units,
+      $standardReferenceMethod: row.standard_reference_method,
+      $universalProductCode: row.universal_product_code,
+      $filepath: row.universal_product_code,
+      $description: row.description,
+      $addUser: row.add_user,
+      $lastMod: row.last_mod,
+      $style: row.style,
+      $category: row.category,
+      $brewer: row.brewer,
+      $address: row.address,
+      $city: row.city,
+      $state: row.state,
+      $country: row.country,
+      $coordinates: row.coordinates,
+      $website: row.website
     }
     return this.common.run(sqlRequest, sqlParams)
   };
@@ -126,7 +145,6 @@ class BeerDAO {
 
     let sqlParams_limit = []
     let sqlParams_offset = []
-    let sqlParams_orderBy = []
     let sqlParams_where = []
 
     for (const param in params) {
@@ -165,8 +183,7 @@ class BeerDAO {
           sqlParams_limit.push(params[param])
           break;
         case 'orderBy':
-          sqlRequest_orderBy = ' ORDER BY ?'
-          sqlParams_orderBy.push(params[param])
+          sqlRequest_orderBy = ' ORDER BY '+params[param]
           break;
         case 'page':
           if (params.limit) {
@@ -182,7 +199,7 @@ class BeerDAO {
       sqlRequest_orderBy+
       sqlRequest_limit+
       (sqlRequest_limit?sqlRequest_offset:'')
-    const sqlParams = sqlParams_where.concat(sqlParams_orderBy.concat(sqlParams_limit.concat(sqlParams_offset)))
+    const sqlParams = sqlParams_where.concat(sqlParams_limit.concat(sqlParams_offset))
     
     console.log('Input request: \t\t',sqlRequest)
     console.log('Evaluated Params: \t',sqlParams)
