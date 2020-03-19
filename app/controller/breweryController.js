@@ -45,6 +45,10 @@ class BreweryController {
     return this.breweryDAO.create(brewery)
       .then(() => this.breweryDAO.findById(brewery.id))
       .then((brewery) => {
+        res.io.emit('brewery', {
+          type: 'CREATE',
+          content: brewery
+        })
         res.status(201)
         res.json(brewery)
       })
@@ -55,7 +59,14 @@ class BreweryController {
     const id = req.params.id
 
     this.breweryDAO.deleteById(id)
-      .then(this.common.editSuccess(res))
+      .then(() => {
+        res.io.emit('brewery', {
+          type: 'DELETE',
+          content: id
+        })
+        this.common.editSuccess(res)()
+      }
+      )
       .catch(this.common.serverError(res))
   };
 
@@ -70,6 +81,10 @@ class BreweryController {
       .then(this.breweryDAO.findById(req.params.id))
       .then(() => this.breweryDAO.findById(brewery.id))
       .then((brewery) => {
+        res.io.emit('brewery', {
+          type: 'UPDATE',
+          content: brewery
+        })
         res.status(201)
         res.json(brewery)
       })
