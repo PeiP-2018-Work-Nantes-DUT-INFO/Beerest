@@ -28,6 +28,10 @@ class CategorieController {
     return this.categorieDAO.create(categorie)
       .then(() => this.categorieDAO.findById(categorie.id))
       .then((categorie) => {
+        res.io.emit('category', {
+          type: 'CREATE',
+          content: categorie
+        })
         res.status(201)
         res.json(categorie)
       })
@@ -38,7 +42,13 @@ class CategorieController {
     const id = req.params.id
 
     this.categorieDAO.deleteById(id)
-      .then(this.common.editSuccess(res))
+      .then(() => {
+        res.io.emit('category', {
+          type: 'DELETE',
+          content: id
+        })
+        this.common.editSuccess(res)()
+      })
       .catch(this.common.serverError(res))
   };
 
@@ -53,6 +63,10 @@ class CategorieController {
       .then(this.categorieDAO.findById(req.params.id))
       .then(() => this.categorieDAO.findById(categorie.id))
       .then((categorie) => {
+        res.io.emit('category', {
+          type: 'UPDATE',
+          content: categorie
+        })
         res.status(201)
         res.json(categorie)
       })
