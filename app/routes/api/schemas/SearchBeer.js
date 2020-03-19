@@ -54,6 +54,38 @@ module.exports = {
       },
       toInt: true
     },
+    orderBy: {
+      in: ['query'],
+      optional: { 
+        options: { nullable: true }
+      },
+      isIn: {
+        options: [[
+          'name',
+          'id',
+          'brewery_id',
+          'cat_id',
+          'style_id',
+          'alcohol_by_volume',
+          'international_bitterness_units ',
+          'standard_reference_method',
+          'universal_product_code',
+          'filepath',
+          'description',
+          'add_user',
+          'last_mod',
+          'style',
+          'category',
+          'brewer',
+          'address',
+          'city',
+          'state',
+          'country',
+          'coordinates',
+          'website',
+        ]]
+      }
+    },
     page: {
       in: ['query'],
       optional: { 
