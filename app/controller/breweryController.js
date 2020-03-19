@@ -30,7 +30,7 @@ class BreweryController {
     console.log('Input parameters: \t', req.query)
     const errors = validationResult(req)
 
-    if (errors.errors.length == 0) {
+    if (errors.errors.length === 0) {
       this.breweryDAO.search(req.query)
         .then(this.common.findSuccess(res))
         .catch(this.common.findError(res))
@@ -66,7 +66,7 @@ class BreweryController {
             categorie.lastMod = req.body.lastMod; */
     brewery = Object.assign(brewery, req.body)
 
-    return this.breweryDAO.update(beer)
+    return this.breweryDAO.update(brewery)
       .then(this.breweryDAO.findById(req.params.id))
       .then(() => this.breweryDAO.findById(brewery.id))
       .then((brewery) => {
