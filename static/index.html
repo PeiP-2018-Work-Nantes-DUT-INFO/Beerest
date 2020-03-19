@@ -9,20 +9,25 @@
 <body>
     <h1> Coming soon</h1>
     <script>
-        const socket = io('/tchat')
-        socket.on('room-error', (err) => {
+        const socket = io()
+        socket.on('category', console.log)
+        socket.on('beer', console.log)
+        socket.on('brewery', console.log)
+        
+        const tchatSocket = io('/tchat')
+        tchatSocket.on('room-error', (err) => {
             console.error(err)
         })
-        socket.on('message', console.log)
+        tchatSocket.on('message', console.log)
         /*
             Seulement les villes présentent dans la table des brasseries sont autorisées
         */
         const array = ['Carquefou', 'Strasbourg', 'Aix les Bains']
         const randomCity = array[Math.floor(Math.random() * array.length)];
-        socket.emit('room', randomCity)
-        socket.emit('room', 'unknown city')
+        tchatSocket.emit('room', randomCity)
+        tchatSocket.emit('room', 'unknown city') // ne devrait pas fonctionner
 
-        socket.emit('message', 'Hello there ?')
+        tchatSocket.emit('message', 'Hello there ?')
     </script>
 </body>
 </html>
