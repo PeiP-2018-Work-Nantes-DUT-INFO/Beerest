@@ -1,10 +1,10 @@
 const Beer = require('../model/beer')
 
-const daoCommon = require('./commons/daoCommon')
+const DaoCommon = require('./commons/daoCommon')
 
 class BeerDAO {
   constructor () {
-    this.common = new daoCommon()
+    this.common = new DaoCommon()
   }
 
   findAll () {
@@ -24,16 +24,16 @@ class BeerDAO {
       .then(row => new Beer(row))
   };
 
-  findByBreweryId (brewery_id) {
+  findByBreweryId (breweryID) {
     const sqlRequest = 'SELECT * FROM beer WHERE brewery_id = ?'
-    const sqlParams = [brewery_id]
+    const sqlParams = [breweryID]
     return this.common.findAllWithParams(sqlRequest, sqlParams)
       .then(row => new Beer(row))
   };
 
-  findByCatId (cat_id) {
+  findByCatId (catID) {
     const sqlRequest = 'SELECT * FROM beer WHERE cat_id = ?'
-    const sqlParams = [cat_id]
+    const sqlParams = [catID]
     return this.common.findAllWithParams(sqlRequest, sqlParams)
       .then(row => new Beer(row))
   };
