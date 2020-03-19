@@ -15,7 +15,10 @@ process.on('exit', function (code) {
 database
   .init
   .then((db) => {
-    app.listen(port, function () {
+    http.listen(port, function (err) {
+      if (err) {
+        console.error(err)
+      }
       console.log('Server listening on port : ' + port)
     })
 
@@ -28,9 +31,10 @@ database
 
     // accès aux pages statiques
     app.use('/static', express.static('static'))
+    require('./app/handlers/index')(io)
   })
 
-io.on('connection', function (socket) {
-  console.log(socket.client.conn.transport)
-  console.log('New client')
+app.use(function (_, res, next) {
+  res.io = io
+  next()
 })

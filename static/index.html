@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
+    <script src="/socket.io/socket.io.js"></script>     
 </head>
 <body>
     <h1> Coming soon</h1>
+    <script>
+        const socket = io('/tchat')
+        socket.on('room-error', (err) => {
+            console.error(err)
+        })
+        socket.on('message', console.log)
+        /*
+            Seulement les villes présentent dans la table des brasseries sont autorisées
+        */
+        const array = ['Carquefou', 'Strasbourg', 'Aix les Bains']
+        const randomCity = array[Math.floor(Math.random() * array.length)];
+        socket.emit('room', randomCity)
+        socket.emit('room', 'unknown city')
+
+        socket.emit('message', 'Hello there ?')
+    </script>
 </body>
 </html>
