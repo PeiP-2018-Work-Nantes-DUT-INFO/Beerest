@@ -53,6 +53,43 @@ class BeerController {
     }
     console.log('====END=SEARCH====')
   }
+
+  create (req, res) {
+    const beer = new Beer(req.body)
+    return this.beerDAO.create(beer)
+        .then(() => this.beerDAO.findById(beer.id))
+        .then((beer) => {
+          res.status(201)
+          res.json(beer)
+        })
+        .catch(this.common.serverError(res))
+  }
+
+  deleteById (req, res) {
+    const id = req.params.id
+
+    this.beerDAO.deleteById(id)
+        .then(this.common.editSuccess(res))
+        .catch(this.common.serverError(res))
+  };
+
+  update (req, res) {
+    let beer = new Beer()
+    /* categorie.id = req.body.id;
+        categorie.catName = req.body.catName;
+        categorie.lastMod = req.body.lastMod; */
+    beer = Object.assign(beer, req.body)
+
+    return this.beerDAO.update(beer)
+        .then(this.beerDAO.findById(req.params.id))
+        .then(() => this.beerDAO.findById(beer.id))
+        .then((beer) => {
+          res.status(201)
+          res.json(beer)
+        })
+        .catch(err => console.log(err))
+  };
+
 }
 
 module.exports = BeerController
