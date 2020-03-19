@@ -38,6 +38,82 @@ class BeerDAO {
       .then(row => new Beer(row))
   };
 
+  create (beer) {
+    const sqlRequest = 'INSERT INTO beer(' +
+        'name,id,brewery_id, cat_id, style_id, alcohol_by_volume, international_bitterness_units, standard_reference_method, ' +
+        'universal_product_code, filepath, description, add_user, last_mod, style, category, brewer, address, city, state, ' +
+        'country, coordinates, website) ' +
+        'VALUES ($name,$id,$brewery_id, $cat_id, $style_id, $alcohol_by_volume, $international_bitterness_units, $standard_reference_method,' +
+        '$universal_product_code, $filepath, $description, $add_user, $last_mod, $style, $category, $brewer, $address, $city, $state, ' +
+        '$country, $coordinates, $website) '
+    const sqlParams = {
+      $name: row.name,
+      $id: row.id,
+      $breweryId: row.brewery_id,
+      $catId: row.cat_id,
+      $styleId: row.style_id,
+      $alcoholByVolume: row.alcohol_by_volume,
+      $internationalBitternessUnits: row.international_bitterness_units,
+      $standardReferenceMethod: row.standard_reference_method,
+      $universalProductCode: row.universal_product_code,
+      $filepath: row.universal_product_code,
+      $description: row.description,
+      $addUser: row.add_user,
+      $lastMod: row.last_mod,
+      $style: row.style,
+      $category: row.category,
+      $brewer: row.brewer,
+      $address: row.address,
+      $city: row.city,
+      $state: row.state,
+      $country: row.country,
+      $coordinates: row.coordinates,
+      $website: row.website
+    }
+    // console.log(sqlParams, sqlRequest);
+    return this.common.run(sqlRequest, sqlParams)
+  };
+
+  deleteById (id) {
+    const sqlRequest = 'DELETE FROM beer WHERE id=$id'
+    const sqlParams = { $id: id }
+    return this.common.run(sqlRequest, sqlParams)
+  };
+
+  update (beer) {
+    const sqlRequest = 'UPDATE beer SET ' +
+        'name = $catName, ' +
+        'id = $id ' +
+        'brewery_id = $brewery_id ' +
+        'cat_id = $cat_id ' +
+        'style_id = $style_id ' +
+        'alcohol_by_volume = $alcohol_by_volume ' +
+        'international_bitterness_units = $international_bitterness_units ' +
+        'standard_reference_method = $standard_reference_method ' +
+        'universal_product_code = $universal_product_code ' +
+        'filepath = $filepath ' +
+        'description = $description ' +
+        'add_user = $add_user ' +
+        'last_mod = $last_mod ' +
+        'style = $style ' +
+        'category = $category ' +
+        'brewer = $brewer ' +
+        'address = $address ' +
+        'city = $city ' +
+        'state = $state ' +
+        'country = $country ' +
+        'coordinates = $coordinates ' +
+        'website = $website ' +
+        'WHERE id = $id'
+
+    const sqlParams = {
+      $catName: categorie.catName,
+      $lastMod: categorie.lastMod,
+      $id: beer.id
+    }
+    return this.common.run(sqlRequest, sqlParams)
+  };
+
   /**
    * 
    * @param {Object} params 
