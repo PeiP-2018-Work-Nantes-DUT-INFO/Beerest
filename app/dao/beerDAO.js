@@ -47,9 +47,28 @@ class BeerDAO {
         '$universal_product_code, $filepath, $description, $add_user, $last_mod, $style, $category, $brewer, $address, $city, $state, ' +
         '$country, $coordinates, $website) '
     const sqlParams = {
-      $id: beer.id,
-      $catName: beer.catName,
-      $lastMod: beer.lastMod
+      $name: row.name,
+      $id: row.id,
+      $breweryId: row.brewery_id,
+      $catId: row.cat_id,
+      $styleId: row.style_id,
+      $alcoholByVolume: row.alcohol_by_volume,
+      $internationalBitternessUnits: row.international_bitterness_units,
+      $standardReferenceMethod: row.standard_reference_method,
+      $universalProductCode: row.universal_product_code,
+      $filepath: row.universal_product_code,
+      $description: row.description,
+      $addUser: row.add_user,
+      $lastMod: row.last_mod,
+      $style: row.style,
+      $category: row.category,
+      $brewer: row.brewer,
+      $address: row.address,
+      $city: row.city,
+      $state: row.state,
+      $country: row.country,
+      $coordinates: row.coordinates,
+      $website: row.website
     }
     // console.log(sqlParams, sqlRequest);
     return this.common.run(sqlRequest, sqlParams)
