@@ -35,7 +35,6 @@ echo '--------------------------------------------------------------------------
 echo -e "\033[33mSuppression de la catégoie 100\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/categorie/100"
 echo
-echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[31mERREUR: Suppression d'une catégorie inexistante 1234\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/categorie/1234"
