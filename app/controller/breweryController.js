@@ -67,7 +67,10 @@ class BreweryController {
         this.common.editSuccess(res)()
       }
       )
-      .catch(this.common.serverError(res))
+      .catch(err => {
+        console.log(err)
+        return this.common.serverError(res)(err)
+      })
   };
 
   update (req, res) {
