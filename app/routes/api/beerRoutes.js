@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { checkSchema } = require('express-validator');
+const { checkSchema } = require('express-validator')
 
 const BeerController = require('../../controller/beerController')
 const beerController = new BeerController()
@@ -26,6 +26,14 @@ router.get('/cat/:cat_id', function (req, res) {
 
 router.get('/:id', function (req, res) {
   beerController.findById(req, res)
+})
+
+router.delete('/:id', function (req, res) {
+  beerController.deleteById(req)
+})
+
+router.put('/:id', function (req, res) {
+  beerController.update(req, res)
 })
 
 module.exports = router
