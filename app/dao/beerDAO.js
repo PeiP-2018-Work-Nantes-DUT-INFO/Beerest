@@ -39,13 +39,9 @@ class BeerDAO {
   };
 
   create (beer) {
-    const sqlRequest = 'INSERT INTO beer(' +
-        'name,id,brewery_id, cat_id, style_id, alcohol_by_volume, international_bitterness_units, standard_reference_method, ' +
-        'universal_product_code, filepath, description, add_user, last_mod, style, category, brewer, address, city, state, ' +
-        'country, coordinates, website) ' +
-        'VALUES ($name,$id,$brewery_id, $cat_id, $style_id, $alcohol_by_volume, $international_bitterness_units, $standard_reference_method,' +
-        '$universal_product_code, $filepath, $description, $add_user, $last_mod, $style, $category, $brewer, $address, $city, $state, ' +
-        '$country, $coordinates, $website) '
+    const sqlRequest = 'INSERT OR IGNORE into beer (' +
+    'name,id,brewery_id,cat_id,style_id,alcohol_by_volume,international_bitterness_units,standard_reference_method,universal_product_code,universal_product_code,description,add_user,last_mod,style,category,brewer,address,city,state,country,coordinates,website) ' +
+    'VALUES ($name,$id,$breweryId,$catId,$styleId,$alcoholByVolume,$internationalBitternessUnits,$standardReferenceMethod,$universalProductCode,$filepath,$description,$addUser,$lastMod,$style,$category,$brewer,$address,$city,$state,$country,$coordinates,$website)'
     const sqlParams = {
       $name: beer.name,
       $id: beer.id,
@@ -70,7 +66,6 @@ class BeerDAO {
       $coordinates: beer.coordinates,
       $website: beer.website
     }
-    // console.log(sqlParams, sqlRequest);
     return this.common.run(sqlRequest, sqlParams)
   };
 

@@ -12,6 +12,9 @@ router.get('/', function (req, res) {
   beerController.findAll(res)
 })
 
+router.post('/', function (req, res) {
+  beerController.create(req, res)
+})
 router.get('/search', checkSchema(searchBeer), function (req, res) {
   beerController.search(req, res)
 })
