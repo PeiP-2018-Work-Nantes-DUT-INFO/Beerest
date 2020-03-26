@@ -88,7 +88,7 @@ class BeerDAO {
     'description=$description, ' +
     'add_user=$addUser, ' +
     'last_mod=$lastMod, ' +
-    'filepath=$lastMod, ' +
+    'filepath=$filepath, ' +
     'style=$style, ' +
     'category=$category, ' +
     'brewer=$brewer, ' +
