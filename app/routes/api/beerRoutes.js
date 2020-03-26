@@ -12,12 +12,12 @@ router.get('/', function (req, res) {
   beerController.findAll(res)
 })
 
-router.get('/:id', function (req, res) {
-  beerController.findById(req, res)
-})
-
 router.get('/search', checkSchema(searchBeer), function (req, res) {
   beerController.search(req, res)
+})
+
+router.get('/:id', function (req, res) {
+  beerController.findById(req, res)
 })
 
 router.get('/brewery/:brewery_id', function (req, res) {

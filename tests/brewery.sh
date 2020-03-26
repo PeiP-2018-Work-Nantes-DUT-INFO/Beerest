@@ -60,8 +60,8 @@ echo -e "\033[31mERREUR: pays/ville inexistante, Args={ limit: 10, city: jfrjfb 
 curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/brewery/search?limit=10&city=jfrjfb"
 echo
 echo '------------------------------------------------------------------------------'
-echo -e "\033[33mAffichage ordonné par nom, Args={ limit: 10, orderBy: name }\033[39m"
-curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/brewery/search?limit=10&orderBy=name"
+echo -e "\033[33mAffichage ordonné par nom, Args={ limit: 10, orderBy: breweries }\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/brewery/search?limit=10&orderBy=breweries"
 echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[31mERREUR: nom de colonne inexistant, Args={ limit: 10, orderBy: nom }\033[39m"
