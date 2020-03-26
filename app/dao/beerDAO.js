@@ -2,11 +2,26 @@ const Beer = require('../model/beer')
 
 const DaoCommon = require('./commons/daoCommon')
 
+/**
+ *
+ *
+ * @class BeerDAO
+ */
 class BeerDAO {
+  /**
+   * Créer une instance de BeerDAO.
+   * @memberof BeerDAO
+   */
   constructor () {
     this.common = new DaoCommon()
   }
 
+  /**
+   * Construit une requête SQL pour rechercher toutes les bières
+   *
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   findAll () {
     const sqlRequest = 'SELECT * FROM beer'
 
@@ -17,6 +32,13 @@ class BeerDAO {
       })
   };
 
+  /**
+   * Construit une requête SQL pour rechercher une bière par son id
+   *
+   * @param {*} id
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   findById (id) {
     const sqlRequest = 'SELECT * FROM beer WHERE id=$id'
     const sqlParams = { $id: id }
@@ -24,6 +46,13 @@ class BeerDAO {
       .then(row => new Beer(row))
   };
 
+  /**
+   * Construit une requête SQL pour rechercher les bières d'une brasserie
+   *
+   * @param {*} breweryID
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   findByBreweryId (breweryID) {
     const sqlRequest = 'SELECT * FROM beer WHERE brewery_id = ?'
     const sqlParams = [breweryID]
@@ -31,6 +60,13 @@ class BeerDAO {
       .then(row => new Beer(row))
   };
 
+  /**
+   * Construit une requête SQL pour rechercher les bières d'une catégorie
+   *
+   * @param {*} catID
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   findByCatId (catID) {
     const sqlRequest = 'SELECT * FROM beer WHERE cat_id = ?'
     const sqlParams = [catID]
@@ -38,6 +74,13 @@ class BeerDAO {
       .then(row => new Beer(row))
   };
 
+  /**
+   * Construit une requête SQL pour la création d'une bière
+   *
+   * @param {*} beer la bière à ajouter
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   create (beer) {
     const sqlRequest = 'INSERT into beer (' +
     'name,id,brewery_id,cat_id,style_id,alcohol_by_volume,international_bitterness_units,standard_reference_method,universal_product_code,universal_product_code,description,add_user,last_mod,style,category,brewer,address,city,state,country,coordinates,website) ' +
@@ -69,12 +112,26 @@ class BeerDAO {
     return this.common.run(sqlRequest, sqlParams)
   };
 
+  /**
+   * Construit une requête SQL de suppression pour un id de bière
+   *
+   * @param {*} id
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   deleteById (id) {
     const sqlRequest = 'DELETE FROM beer WHERE id=$id'
     const sqlParams = { $id: id }
     return this.common.run(sqlRequest, sqlParams)
   };
 
+  /**
+   * Construit une requête SQL de mise à jour pour une bière
+   *
+   * @param {*} beer
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
+   */
   update (beer) {
     const sqlRequest = 'UPDATE beer SET ' +
     'name=$name, ' +
@@ -128,10 +185,14 @@ class BeerDAO {
   };
 
   /**
+   * Construit une requête SQL de filtrage à partir de paramètres
    *
-   * @param {Object} params
+   * @param {*} params
+   * @returns {Promise<any>}
+   * @memberof BeerDAO
    */
   search (params) {
+    // Initialisation des "morceaux" de la requête
     let sqlRequestLimit = ''
     let sqlRequestOffset = ''
     let sqlRequestOrderBy = ''
@@ -141,6 +202,7 @@ class BeerDAO {
     const sqlParamsOffset = []
     const sqlParamsWhere = []
 
+    // Construction de chaque "morceau" avec les arguments reçus
     for (const param in params) {
       switch (param) {
         case 'city':
@@ -187,6 +249,7 @@ class BeerDAO {
       }
     }
 
+    // Construction de la requête finale dans le bon ordre
     const sqlRequest = 'SELECT * FROM beer' +
       ((sqlRequestWhere) === ' WHERE' ? '' : sqlRequestWhere) +
       sqlRequestOrderBy +
@@ -194,6 +257,7 @@ class BeerDAO {
       (sqlRequestLimit ? sqlRequestOffset : '')
     const sqlParams = sqlParamsWhere.concat(sqlParamsLimit.concat(sqlParamsOffset))
 
+    // DEBUG
     console.log('Input request: \t\t', sqlRequest)
     console.log('Evaluated Params: \t', sqlParams)
 

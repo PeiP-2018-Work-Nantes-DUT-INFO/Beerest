@@ -6,18 +6,40 @@ const { validationResult } = require('express-validator')
 /* Load Controller Common function */
 const ControllerCommon = require('./common/controllerCommon')
 
+/**
+ *
+ *
+ * @class BeerController
+ */
 class BeerController {
+  /**
+   * Créer une instance de BeerController.
+   * @memberof BeerController
+   */
   constructor () {
     this.beerDAO = new BeerDAO()
     this.common = new ControllerCommon()
   }
 
+  /**
+   *
+   *
+   * @param {*} res
+   * @memberof BeerController
+   */
   findAll (res) {
     this.beerDAO.findAll()
       .then(this.common.findSuccess(res))
       .catch(this.common.findError(res))
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BeerController
+   */
   findById (req, res) {
     const id = req.params.id
     this.beerDAO.findById(id)
@@ -25,6 +47,13 @@ class BeerController {
       .catch(this.common.findError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BeerController
+   */
   findByBreweryId (req, res) {
     const breweryID = req.params.brewery_id
     this.beerDAO.findByBreweryId(breweryID)
@@ -32,6 +61,13 @@ class BeerController {
       .catch(this.common.findError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BeerController
+   */
   findByCatId (req, res) {
     const catID = req.params.cat_id
     this.beerDAO.findByBreweryId(catID)
@@ -39,6 +75,13 @@ class BeerController {
       .catch(this.common.findError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BeerController
+   */
   search (req, res) {
     console.log('\n======SEARCH======')
     console.log('Input parameters: \t', req.query)
@@ -54,6 +97,14 @@ class BeerController {
     console.log('====END=SEARCH====')
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof BeerController
+   */
   create (req, res) {
     const beer = new Beer(req.body)
     return this.beerDAO.create(beer)
@@ -69,6 +120,13 @@ class BeerController {
       .catch(this.common.serverError(res))
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BeerController
+   */
   deleteById (req, res) {
     const id = req.params.id
 
@@ -83,6 +141,14 @@ class BeerController {
       .catch(this.common.serverError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof BeerController
+   */
   update (req, res) {
     let beer = new Beer()
     /* categorie.id = req.body.id;
