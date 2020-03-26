@@ -73,6 +73,19 @@ echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[33mAffichage ordonné par nom, Args={ limit: 100, orderBy: name }\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/beer/search?limit=100&orderBy=name"
+echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[31mERREUR: nom de colonne inexistant, Args={ limit: 100, orderBy: nom }\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/beer/search?limit=100&orderBy=nom"
+echo
+echo '------------------------------------------------------------------------------'
+echo -e "\033[33mSuppression de la bière 5915\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/100"
+echo
+echo '------------------------------------------------------------------------------'
+echo -e "\033[31mERREUR: Suppression d'une bière inexistante 0\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/1234"
+echo
+echo '------------------------------------------------------------------------------'
+echo -e "\033[31mERREUR: Affichage de la bière 5915\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/beer/100"
