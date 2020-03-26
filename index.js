@@ -31,9 +31,10 @@ database
 
     // accès aux pages statiques
     app.use('/static', express.static('static'))
-    require('./app/handlers/index')(io)
+    require('./app/handlers/index')(io) // on charge les handlers de socketio
   })
 
+// Middleware qui permet d'accéder à l'instance de socket io dans les handler d'express
 app.use(function (_, res, next) {
   res.io = io
   next()
