@@ -88,9 +88,9 @@ echo -e "\033[33mSuppression de la bière 5915\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/5915"
 echo
 echo '------------------------------------------------------------------------------'
-echo -e "\033[31mERREUR: Suppression d'une bière inexistante 0\033[39m"
-curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/1234"
+echo -e "\033[31mERREUR: Suppression d'une bière inexistante 5915\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/5915"
 echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[31mERREUR: Affichage de la bière 5915\033[39m"
-curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/beer/100"
+curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/beer/5915"
