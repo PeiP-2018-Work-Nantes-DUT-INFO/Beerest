@@ -9,7 +9,7 @@ const DaoError = require('./daoError')
  */
 class Common {
   /**
-   *
+   * Exécute la requête SQL et renvoi toutes les lignes d'une table
    *
    * @param {*} sqlRequest
    * @returns
@@ -34,7 +34,7 @@ class Common {
   }
 
   /**
-   *
+   * Exécute la requête SQL et renvoi toutes les lignes correspondantes
    *
    * @param {*} sqlRequest
    * @param {*} sqlParams
@@ -62,7 +62,7 @@ class Common {
   }
 
   /**
-   *
+   * Exécute la requête SQL et renvoi une seule ligne
    *
    * @param {*} sqlRequest
    * @param {*} sqlParams
@@ -90,34 +90,7 @@ class Common {
   }
 
   /**
-   *
-   *
-   * @param {*} sqlRequest
-   * @param {*} sqlParams
-   * @returns
-   * @memberof Common
-   */
-  existsOne (sqlRequest, sqlParams) {
-    return new Promise(function (resolve, reject) {
-      const stmt = database.db.prepare(sqlRequest)
-      stmt.each(sqlParams, function (err, row) {
-        if (err) {
-          reject(
-            new DaoError(20, 'Internal server error')
-          )
-        } else if (row && row.found === 1) {
-          resolve(true)
-        } else {
-          reject(
-            new DaoError(21, 'Entity not found')
-          )
-        }
-      })
-    })
-  }
-
-  /**
-   *
+   * Exécute la requête SQL en prepare statement
    *
    * @param {*} sqlRequest
    * @param {*} sqlParams

@@ -1,13 +1,13 @@
 /**
- *
+ * Schéma de validation des données
  */
 module.exports = {
   city: {
-    in: ['query'],
+    in: ['query'], // Doit appartenir à l'URL
     optional: {
-      options: { nullable: true }
+      options: { nullable: true } // Peut ne pas être présent
     },
-    isAlphanumeric: true
+    isAlphanumeric: true // Est alphanumérique
   },
   country: {
     in: ['query'],
@@ -21,13 +21,13 @@ module.exports = {
     optional: {
       options: { nullable: true }
     },
-    isInt: {
+    isInt: { // Est un int supérieur à 0
       options: {
         isInt: true,
         min: 1
       }
     },
-    toInt: true
+    toInt: true // Conversion de string a int
   },
   orderBy: {
     in: ['query'],
@@ -35,7 +35,7 @@ module.exports = {
       options: { nullable: true }
     },
     isIn: {
-      options: [[
+      options: [[ // Doit appartenir au tableau suivant
         'breweries',
         'address1',
         'address2',
@@ -64,7 +64,7 @@ module.exports = {
       }
     },
     toInt: true,
-    custom: {
+    custom: { // Renvoi un message d'erreur personnalisé
       errorMessage: 'Limit parameter is required',
       options: (value, { req }) => !!req.query.limit
     }
