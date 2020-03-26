@@ -33,28 +33,19 @@ module.exports = {
     },
     isIn: {
       options: [[
-        'name',
-        'id',
-        'brewery_id',
-        'cat_id',
-        'style_id',
-        'alcohol_by_volume',
-        'international_bitterness_units ',
-        'standard_reference_method',
-        'universal_product_code',
-        'filepath',
-        'description',
-        'add_user',
-        'last_mod',
-        'style',
-        'category',
-        'brewer',
-        'address',
+        'breweries',
+        'address1',
+        'address2',
         'city',
         'state',
+        'code',
         'country',
-        'coordinates',
-        'website'
+        'phone',
+        'website',
+        'filepath',
+        'descript',
+        'last_mod',
+        'coordinates'
       ]]
     }
   },
