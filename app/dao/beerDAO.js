@@ -39,7 +39,7 @@ class BeerDAO {
   };
 
   create (beer) {
-    const sqlRequest = 'INSERT OR IGNORE into beer (' +
+    const sqlRequest = 'INSERT into beer (' +
     'name,id,brewery_id,cat_id,style_id,alcohol_by_volume,international_bitterness_units,standard_reference_method,universal_product_code,universal_product_code,description,add_user,last_mod,style,category,brewer,address,city,state,country,coordinates,website) ' +
     'VALUES ($name,$id,$breweryId,$catId,$styleId,$alcoholByVolume,$internationalBitternessUnits,$standardReferenceMethod,$universalProductCode,$filepath,$description,$addUser,$lastMod,$style,$category,$brewer,$address,$city,$state,$country,$coordinates,$website)'
     const sqlParams = {
@@ -78,26 +78,26 @@ class BeerDAO {
   update (beer) {
     const sqlRequest = 'UPDATE beer SET ' +
         'name = $catName, ' +
-        'id = $id ' +
-        'brewery_id = $brewery_id ' +
-        'cat_id = $cat_id ' +
-        'style_id = $style_id ' +
-        'alcohol_by_volume = $alcohol_by_volume ' +
-        'international_bitterness_units = $international_bitterness_units ' +
-        'standard_reference_method = $standard_reference_method ' +
-        'universal_product_code = $universal_product_code ' +
-        'filepath = $filepath ' +
-        'description = $description ' +
-        'add_user = $add_user ' +
-        'last_mod = $last_mod ' +
-        'style = $style ' +
-        'category = $category ' +
-        'brewer = $brewer ' +
-        'address = $address ' +
-        'city = $city ' +
-        'state = $state ' +
-        'country = $country ' +
-        'coordinates = $coordinates ' +
+        'id = $id, ' +
+        'brewery_id = $brewery_id, ' +
+        'cat_id = $cat_id, ' +
+        'style_id = $style_id, ' +
+        'alcohol_by_volume = $alcohol_by_volume, ' +
+        'international_bitterness_units = $international_bitterness_units, ' +
+        'standard_reference_method = $standard_reference_method, ' +
+        'universal_product_code = $universal_product_code, ' +
+        'filepath = $filepath, ' +
+        'description = $description, ' +
+        'add_user = $add_user, ' +
+        'last_mod = $last_mod, ' +
+        'style = $style, ' +
+        'category = $category, ' +
+        'brewer = $brewer, ' +
+        'address = $address, ' +
+        'city = $city, ' +
+        'state = $state, ' +
+        'country = $country, ' +
+        'coordinates = $coordinates, ' +
         'website = $website ' +
         'WHERE id = $id'
 
