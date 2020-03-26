@@ -6,28 +6,30 @@ const { checkSchema } = require('express-validator')
 const BreweryController = require('../../controller/breweryController')
 const breweryController = new BreweryController()
 
-const searchBrewery = require('./schemas/SearchBeer')
+const searchBrewery = require('./schemas/SearchBrewery')
 
 router.get('/', function (req, res) {
-    breweryController.findAll(res)
+  breweryController.findAll(res)
 })
 
 router.post('/', function (req, res) {
-    breweryController.create(req, res)
+  breweryController.create(req, res)
 })
-/*router.get('/search', checkSchema(searchBeer), function (req, res) {
-    breweryController.search(req, res)
-})*/
+
+router.get('/search', checkSchema(searchBrewery), function (req, res) {
+  breweryController.search(req, res)
+})
+
 router.get('/:id', function (req, res) {
-    breweryController.findById(req, res)
+  breweryController.findById(req, res)
 })
 
 router.delete('/:id', function (req, res) {
-    breweryController.deleteById(req)
+  breweryController.deleteById(req)
 })
 
 router.put('/:id', function (req, res) {
-    breweryController.update(req, res)
+  breweryController.update(req, res)
 })
 
 module.exports = router
