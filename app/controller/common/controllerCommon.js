@@ -1,6 +1,7 @@
 /**
  * Controllers Common functions
  */
+const ValidationError = require('../../routes/api/schemas/ValidationError')
 class controllerCommon {
   findSuccess (res) {
     return (result) => {
@@ -40,7 +41,7 @@ class controllerCommon {
   validationError (res) {
     return (error) => {
       res.status(412) // Precondition Failed
-      res.json({ errors: error.array() })
+      res.json(new ValidationError(error.array()))
     }
   }
 }
