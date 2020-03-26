@@ -6,14 +6,9 @@ const { validationResult } = require('express-validator')
 /* Load Controller Common function */
 const ControllerCommon = require('./common/controllerCommon')
 
-/**
- *
- *
- * @class BreweryController
- */
 class BreweryController {
   /**
-   *Creates an instance of BreweryController.
+   * Créer une instance de BreweryController.
    * @memberof BreweryController
    */
   constructor () {
@@ -21,25 +16,14 @@ class BreweryController {
     this.common = new ControllerCommon()
   }
 
-  /**
-   *
-   *
-   * @param {*} res
-   * @memberof BreweryController
-   */
+  // GET, /brewery
   findAll (res) {
     this.breweryDAO.findAll()
       .then(this.common.findSuccess(res))
       .catch(this.common.findError(res))
   }
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @memberof BreweryController
-   */
+  // GET, /brewery/:id
   findById (req, res) {
     const id = req.params.id
     this.breweryDAO.findById(id)
@@ -47,13 +31,7 @@ class BreweryController {
       .catch(this.common.findError(res))
   };
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @memberof BreweryController
-   */
+  // GET, /brewery/search?x=[]
   search (req, res) {
     console.log('\n======SEARCH======')
     console.log('Input parameters: \t', req.query)
@@ -69,14 +47,7 @@ class BreweryController {
     console.log('====END=SEARCH====')
   }
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @returns
-   * @memberof BreweryController
-   */
+  // POST, /brewery
   create (req, res) {
     const brewery = new Brewery(req.body)
     return this.breweryDAO.create(brewery)
@@ -92,13 +63,7 @@ class BreweryController {
       .catch(this.common.serverError(res))
   }
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @memberof BreweryController
-   */
+  // DELETE, /brewery/:id
   deleteById (req, res) {
     const id = req.params.id
 
@@ -117,19 +82,9 @@ class BreweryController {
       })
   };
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @returns
-   * @memberof BreweryController
-   */
+  // PUT, /brewery/:id
   update (req, res) {
     let brewery = new Brewery()
-    /* categorie.id = req.body.id;
-            categorie.catName = req.body.catName;
-            categorie.lastMod = req.body.lastMod; */
     brewery = Object.assign(brewery, req.body)
 
     return this.breweryDAO.update(brewery)

@@ -4,36 +4,24 @@ const Categorie = require('../model/categorie')
 /* Load Controller Common function */
 const ControllerCommon = require('./common/controllerCommon')
 
-/**
- *
- *
- * @class CategorieController
- */
 class CategorieController {
+  /**
+   * Créer une instance de CategorieController.
+   * @memberof CategorieController
+   */
   constructor () {
     this.categorieDAO = new CategorieDAO()
     this.common = new ControllerCommon()
   }
 
-  /**
-   *
-   *
-   * @param {*} res
-   * @memberof CategorieController
-   */
+  // GET, /categorie
   findAll (res) {
     this.categorieDAO.findAll()
       .then(this.common.findSuccess(res))
       .catch(this.common.findError(res))
   }
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @memberof CategorieController
-   */
+  // GET, /categorie/:id
   findById (req, res) {
     const id = req.params.id
     this.categorieDAO.findById(id)
@@ -41,14 +29,7 @@ class CategorieController {
       .catch(this.common.findError(res))
   };
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @returns
-   * @memberof CategorieController
-   */
+  // POST, /categorie
   create (req, res) {
     const categorie = new Categorie(req.body)
     return this.categorieDAO.create(categorie)
@@ -64,13 +45,7 @@ class CategorieController {
       .catch(this.common.serverError(res))
   }
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @memberof CategorieController
-   */
+  // DELETE, /categorie/:id
   deleteById (req, res) {
     const id = req.params.id
 
@@ -85,19 +60,9 @@ class CategorieController {
       .catch(this.common.serverError(res))
   };
 
-  /**
-   *
-   *
-   * @param {*} req
-   * @param {*} res
-   * @returns
-   * @memberof CategorieController
-   */
+  // PUT, /categorie/:id
   update (req, res) {
     let categorie = new Categorie()
-    /* categorie.id = req.body.id;
-        categorie.catName = req.body.catName;
-        categorie.lastMod = req.body.lastMod; */
     categorie = Object.assign(categorie, req.body)
 
     return this.categorieDAO.update(categorie)
