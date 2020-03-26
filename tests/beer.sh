@@ -27,6 +27,11 @@ echo -e "\033[31mERREUR: Creation d'un double bière $body\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json"  -X POST -d "$body" "http://localhost:3000/api/beer/"
 echo
 echo '------------------------------------------------------------------------------'
+body='{"id":100,"catName":"DemoUpdate","lastMod":"2010-06-08T02:00:00+02:00"}'
+echo -e "\033[33mMise à jour de la catégorie 100 : $body\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json"  -X PUT -d $body "http://localhost:3000/api/categorie/100"
+echo
+echo '------------------------------------------------------------------------------'
 echo -e "\033[33mAffichage des 100 premières bière par LIMIT, Args={ limit: 100 }\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/beer/search?limit=100"
 echo
@@ -80,7 +85,7 @@ curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:
 echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[33mSuppression de la bière 5915\033[39m"
-curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/100"
+curl --noproxy "*" -H "Content-Type: application/json" -X DELETE "http://localhost:3000/api/beer/5915"
 echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[31mERREUR: Suppression d'une bière inexistante 0\033[39m"
