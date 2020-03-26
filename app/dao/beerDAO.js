@@ -129,8 +129,8 @@ class BeerDAO {
   };
 
   /**
-   * 
-   * @param {Object} params 
+   *
+   * @param {Object} params
    */
   search (params) {
     let sqlRequestLimit = ''
@@ -138,66 +138,65 @@ class BeerDAO {
     let sqlRequestOrderBy = ''
     let sqlRequestWhere = ' WHERE'
 
-    let sqlParamsLimit = []
-    let sqlParamsOffset = []
-    let sqlParamsWhere = []
+    const sqlParamsLimit = []
+    const sqlParamsOffset = []
+    const sqlParamsWhere = []
 
     for (const param in params) {
-      
       switch (param) {
         case 'city':
-          if (sqlRequestWhere != ' WHERE') {
+          if (sqlRequestWhere !== ' WHERE') {
             sqlRequestWhere += ' AND'
           }
           sqlRequestWhere += ' city LIKE ?'
-          sqlParamsWhere.push('%'+params[param]+'%')
-          break;
+          sqlParamsWhere.push('%' + params[param] + '%')
+          break
         case 'country':
-          if (sqlRequestWhere != ' WHERE') {
+          if (sqlRequestWhere !== ' WHERE') {
             sqlRequestWhere += ' AND'
           }
           sqlRequestWhere += ' country LIKE ?'
-          sqlParamsWhere.push('%'+params[param]+'%')
-          break;
+          sqlParamsWhere.push('%' + params[param] + '%')
+          break
         case 'degAbove':
-          if (sqlRequestWhere != ' WHERE') {
+          if (sqlRequestWhere !== ' WHERE') {
             sqlRequestWhere += ' AND'
           }
           sqlRequestWhere += ' alcohol_by_volume > ?'
           sqlParamsWhere.push(params[param])
-          break;
+          break
         case 'degBelow':
-          if (sqlRequestWhere != ' WHERE') {
+          if (sqlRequestWhere !== ' WHERE') {
             sqlRequestWhere += ' AND'
           }
           sqlRequestWhere += ' alcohol_by_volume < ?'
           sqlParamsWhere.push(params[param])
-          break;
+          break
         case 'limit':
           sqlRequestLimit = ' LIMIT ?'
           sqlParamsLimit.push(params[param])
-          break;
+          break
         case 'orderBy':
-          sqlRequestOrderBy = ' ORDER BY '+params[param]
-          break;
+          sqlRequestOrderBy = ' ORDER BY ' + params[param]
+          break
         case 'page':
           if (params.limit) {
             sqlRequestOffset = ' OFFSET ?'
-            sqlParamsOffset.push(params[param]*params.limit)
+            sqlParamsOffset.push(params[param] * params.limit)
           }
-          break;
-        }
+          break
+      }
     }
 
-    const sqlRequest = 'SELECT * FROM beer'+
-      ((sqlRequestWhere)==' WHERE'?'':sqlRequestWhere)+
-      sqlRequestOrderBy+
-      sqlRequestLimit+
-      (sqlRequestLimit?sqlRequestOffset:'')
+    const sqlRequest = 'SELECT * FROM beer' +
+      ((sqlRequestWhere) === ' WHERE' ? '' : sqlRequestWhere) +
+      sqlRequestOrderBy +
+      sqlRequestLimit +
+      (sqlRequestLimit ? sqlRequestOffset : '')
     const sqlParams = sqlParamsWhere.concat(sqlParamsLimit.concat(sqlParamsOffset))
-    
-    console.log('Input request: \t\t',sqlRequest)
-    console.log('Evaluated Params: \t',sqlParams)
+
+    console.log('Input request: \t\t', sqlRequest)
+    console.log('Evaluated Params: \t', sqlParams)
 
     return this.common.findAllWithParams(sqlRequest, sqlParams)
       .then(rows => {
