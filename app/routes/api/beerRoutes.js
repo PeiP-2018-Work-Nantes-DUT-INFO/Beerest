@@ -28,7 +28,6 @@ router.get('/cat/:cat_id', function (req, res) {
   beerController.findByCatId(req, res)
 })
 
-
 router.post('/', function (req, res) {
   beerController.create(req, res)
 })
@@ -38,7 +37,7 @@ router.put('/:id', function (req, res) {
 })
 
 router.delete('/:id', function (req, res) {
-  beerController.deleteById(req)
+  beerController.deleteById(req, res)
 })
 
 module.exports = router

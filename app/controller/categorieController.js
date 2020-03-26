@@ -70,7 +70,10 @@ class CategorieController {
         res.status(201)
         res.json(categorie)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        return this.common.serverError(res)(err)
+      })
   };
 }
 
