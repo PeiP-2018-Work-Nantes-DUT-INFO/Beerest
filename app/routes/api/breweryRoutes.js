@@ -25,7 +25,7 @@ router.get('/:id', function (req, res) {
 })
 
 router.delete('/:id', function (req, res) {
-  breweryController.deleteById(req)
+  breweryController.deleteById(req, res)
 })
 
 router.put('/:id', function (req, res) {
