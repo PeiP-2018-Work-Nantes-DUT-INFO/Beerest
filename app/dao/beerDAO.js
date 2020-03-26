@@ -33,7 +33,7 @@ class BeerDAO {
   };
 
   /**
-   * Construit une requête SQL pour rechercher une bière
+   * Construit une requête SQL pour rechercher une bière par son id
    *
    * @param {*} id
    * @returns {Promise<any>}

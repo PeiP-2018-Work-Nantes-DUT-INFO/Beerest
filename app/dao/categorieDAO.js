@@ -9,7 +9,7 @@ const DaoCommon = require('./commons/daoCommon')
  */
 class CategorieDAO {
   /**
-   *Creates an instance of CategorieDAO.
+   * Créer une instance de CategorieDAO.
    * @memberof CategorieDAO
    */
   constructor () {
@@ -17,7 +17,7 @@ class CategorieDAO {
   }
 
   /**
-   *
+   * Construit une requête SQL pour rechercher toutes les catégories
    *
    * @returns
    * @memberof CategorieDAO
@@ -34,7 +34,7 @@ class CategorieDAO {
   };
 
   /**
-   *
+   * Construit une requête SQL pour rechercher une catégorie par son id
    *
    * @param {*} id
    * @returns
@@ -49,7 +49,7 @@ class CategorieDAO {
   };
 
   /**
-   *
+   * Construit une requête SQL pour la création d'une catégorie
    *
    * @param {*} categorie
    * @returns
@@ -69,7 +69,7 @@ class CategorieDAO {
   };
 
   /**
-   *
+   * Construit une requête SQL de suppression pour un id de catégorie
    *
    * @param {*} id
    * @returns
@@ -82,7 +82,7 @@ class CategorieDAO {
   };
 
   /**
-   *
+   * Construit une requête SQL de mise à jour pour une catégorie
    *
    * @param {*} categorie
    * @returns
