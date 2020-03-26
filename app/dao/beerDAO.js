@@ -52,7 +52,7 @@ class BeerDAO {
       $internationalBitternessUnits: beer.international_bitterness_units,
       $standardReferenceMethod: beer.standard_reference_method,
       $universalProductCode: beer.universal_product_code,
-      $filepath: beer.universal_product_code,
+      $filepath: beer.filepath,
       $description: beer.description,
       $addUser: beer.add_user,
       $lastMod: beer.last_mod,
@@ -88,17 +88,17 @@ class BeerDAO {
     'description=$description, ' +
     'add_user=$addUser, ' +
     'last_mod=$lastMod, ' +
+    'filepath=$lastMod, ' +
     'style=$style, ' +
     'category=$category, ' +
     'brewer=$brewer, ' +
     'address=$address, ' +
-    'city=$address, ' +
+    'city=$city, ' +
     'state=$state, ' +
     'country=$country, ' +
     'coordinates=$coordinates, ' +
     'website=$website ' +
     'WHERE id=$id'
-    console.log(sqlRequest)
 
     const sqlParams = {
       $name: beer.name,
@@ -110,7 +110,7 @@ class BeerDAO {
       $internationalBitternessUnits: beer.international_bitterness_units,
       $standardReferenceMethod: beer.standard_reference_method,
       $universalProductCode: beer.universal_product_code,
-      $filepath: beer.universal_product_code,
+      $filepath: beer.filepath,
       $description: beer.description,
       $addUser: beer.add_user,
       $lastMod: beer.last_mod,

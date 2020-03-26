@@ -27,9 +27,9 @@ echo -e "\033[31mERREUR: Creation d'un double bière $body\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json"  -X POST -d "$body" "http://localhost:3000/api/beer/"
 echo
 echo '------------------------------------------------------------------------------'
-body='{"id":100,"catName":"DemoUpdate","lastMod":"2010-06-08T02:00:00+02:00"}'
-echo -e "\033[33mMise à jour de la catégorie 100 : $body\033[39m"
-curl --noproxy "*" -H "Content-Type: application/json"  -X PUT -d $body "http://localhost:3000/api/categorie/100"
+body='{"name": "Antidote Beer","id": "5915","brewery_id": "1423","cat_id": "11","style_id": "116","alcohol_by_volume": "4.5","international_bitterness_units": "0","standard_reference_method": "0","universal_product_code": "0","description": "This beer make you healthy","add_user": "0","last_mod": "2010-07-22 22:00:00+02:00","style": "Light American Wheat Ale or Lager","category": "Other Style","brewer": "Magic Hat","address": "5 Bartlett Bay Road","city": "Paris","state": "Ile de France","country": "France","coordinates": "44.4284, -73.2131","website": "http://www.magichat.net/"}'
+echo -e "\033[33mMise à jour de la bière 5915 : $body\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json"  -X PUT -d "$body" "http://localhost:3000/api/beer/5915"
 echo
 echo '------------------------------------------------------------------------------'
 echo -e "\033[33mAffichage des 100 premières bière par LIMIT, Args={ limit: 100 }\033[39m"
