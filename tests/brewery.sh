@@ -27,6 +27,11 @@ echo -e "\033[31mERREUR: Creation d'un double brasserie $body\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json"  -X POST -d "$body" "http://localhost:3000/api/brewery/"
 echo
 echo '------------------------------------------------------------------------------'
+body='{"id":9999,"breweries":"La Taverne des bucherons","address1":"407 Radam, F200","address2":"","city":"Austin","state":"Texas","code":"78745","country":"United States","phone":"512.707.2337","website":"http://512brewing.com/","filepath":"","descript":"(512) Brewing Company is a microbrewery located in the heart of Austin that brews for the community using as many local, domestic and organic ingredients as possible.","last_mod":"2010-07-22T22:00:20+02:00","coordinates":"30.2234,-97.7697"}'
+echo -e "\033[33mMise à jour de la brasserie 9999 : $body\033[39m"
+curl --noproxy "*" -H "Content-Type: application/json"  -X PUT -d "$body" "http://localhost:3000/api/brewery/9999"
+echo
+echo '------------------------------------------------------------------------------'
 echo -e "\033[33mAffichage des 10 premières brasserie par LIMIT, Args={ limit: 10 }\033[39m"
 curl --noproxy "*" -H "Content-Type: application/json" -X GET "http://localhost:3000/api/brewery/search?limit=10"
 echo

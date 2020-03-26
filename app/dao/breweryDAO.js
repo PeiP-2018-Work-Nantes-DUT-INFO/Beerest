@@ -62,21 +62,20 @@ class BreweryDAO {
   };
 
   update (brewery) {
-    const sqlRequest = 'UPDATE beer SET ' +
-            'id = $id' +
-            'breweries = $breweries' +
-            'address1 = $address1' +
-            'address2 = $address2' +
-            'city = $city' +
-            'state = $state' +
-            'code = $code' +
-            'country = $country' +
-            'phone = $phone' +
-            'website = $website' +
-            'filepath = $filepath' +
-            'descript = $descript' +
-            'last_mod = $last_mod' +
-            'coordinates = $coordinates' +
+    const sqlRequest = 'UPDATE brewery SET ' +
+            'breweries = $breweries, ' +
+            'address1 = $address1, ' +
+            'address2 = $address2, ' +
+            'city = $city, ' +
+            'state = $state, ' +
+            'code = $code, ' +
+            'country = $country, ' +
+            'phone = $phone, ' +
+            'website = $website, ' +
+            'filepath = $filepath, ' +
+            'descript = $descript, ' +
+            'last_mod = $lastMod, ' +
+            'coordinates = $coordinates ' +
             'WHERE id = $id'
 
     const sqlParams = {
