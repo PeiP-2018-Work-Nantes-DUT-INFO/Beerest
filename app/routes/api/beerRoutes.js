@@ -6,6 +6,9 @@ const { checkSchema } = require('express-validator')
 const BeerController = require('../../controller/beerController')
 const beerController = new BeerController()
 
+/**
+ * Créer un validateur de données
+ */
 const searchBeer = require('./schemas/SearchBeer')
 
 router.get('/', function (req, res) {

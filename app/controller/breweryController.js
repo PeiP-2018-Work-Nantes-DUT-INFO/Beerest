@@ -6,18 +6,40 @@ const { validationResult } = require('express-validator')
 /* Load Controller Common function */
 const ControllerCommon = require('./common/controllerCommon')
 
+/**
+ *
+ *
+ * @class BreweryController
+ */
 class BreweryController {
+  /**
+   *Creates an instance of BreweryController.
+   * @memberof BreweryController
+   */
   constructor () {
     this.breweryDAO = new BreweryDAO()
     this.common = new ControllerCommon()
   }
 
+  /**
+   *
+   *
+   * @param {*} res
+   * @memberof BreweryController
+   */
   findAll (res) {
     this.breweryDAO.findAll()
       .then(this.common.findSuccess(res))
       .catch(this.common.findError(res))
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BreweryController
+   */
   findById (req, res) {
     const id = req.params.id
     this.breweryDAO.findById(id)
@@ -25,6 +47,13 @@ class BreweryController {
       .catch(this.common.findError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BreweryController
+   */
   search (req, res) {
     console.log('\n======SEARCH======')
     console.log('Input parameters: \t', req.query)
@@ -40,6 +69,14 @@ class BreweryController {
     console.log('====END=SEARCH====')
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof BreweryController
+   */
   create (req, res) {
     const brewery = new Brewery(req.body)
     return this.breweryDAO.create(brewery)
@@ -55,6 +92,13 @@ class BreweryController {
       .catch(this.common.serverError(res))
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof BreweryController
+   */
   deleteById (req, res) {
     const id = req.params.id
 
@@ -73,6 +117,14 @@ class BreweryController {
       })
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof BreweryController
+   */
   update (req, res) {
     let brewery = new Brewery()
     /* categorie.id = req.body.id;

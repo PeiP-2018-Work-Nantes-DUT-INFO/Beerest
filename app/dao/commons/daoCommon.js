@@ -8,6 +8,13 @@ const DaoError = require('./daoError')
  * DAOs Common functions
  */
 class Common {
+  /**
+   *
+   *
+   * @param {*} sqlRequest
+   * @returns
+   * @memberof Common
+   */
   findAll (sqlRequest) {
     return new Promise(function (resolve, reject) {
       database.db.all(sqlRequest, function (err, rows) {
@@ -26,6 +33,14 @@ class Common {
     })
   }
 
+  /**
+   *
+   *
+   * @param {*} sqlRequest
+   * @param {*} sqlParams
+   * @returns
+   * @memberof Common
+   */
   findAllWithParams (sqlRequest, sqlParams) {
     return new Promise(function (resolve, reject) {
       const stmt = database.db.prepare(sqlRequest)
@@ -46,6 +61,14 @@ class Common {
     })
   }
 
+  /**
+   *
+   *
+   * @param {*} sqlRequest
+   * @param {*} sqlParams
+   * @returns
+   * @memberof Common
+   */
   findOne (sqlRequest, sqlParams) {
     return new Promise(function (resolve, reject) {
       const stmt = database.db.prepare(sqlRequest)
@@ -66,6 +89,14 @@ class Common {
     })
   }
 
+  /**
+   *
+   *
+   * @param {*} sqlRequest
+   * @param {*} sqlParams
+   * @returns
+   * @memberof Common
+   */
   existsOne (sqlRequest, sqlParams) {
     return new Promise(function (resolve, reject) {
       const stmt = database.db.prepare(sqlRequest)
@@ -85,6 +116,14 @@ class Common {
     })
   }
 
+  /**
+   *
+   *
+   * @param {*} sqlRequest
+   * @param {*} sqlParams
+   * @returns
+   * @memberof Common
+   */
   run (sqlRequest, sqlParams) {
     return new Promise(function (resolve, reject) {
       const stmt = database.db.prepare(sqlRequest)

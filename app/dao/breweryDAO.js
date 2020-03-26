@@ -2,11 +2,26 @@ const Brewery = require('../model/brewery')
 
 const DaoCommon = require('./commons/daoCommon')
 
+/**
+ *
+ *
+ * @class BreweryDAO
+ */
 class BreweryDAO {
+  /**
+   *Creates an instance of BreweryDAO.
+   * @memberof BreweryDAO
+   */
   constructor () {
     this.common = new DaoCommon()
   }
 
+  /**
+   *
+   *
+   * @returns
+   * @memberof BreweryDAO
+   */
   findAll () {
     const sqlRequest = 'SELECT * FROM brewery'
 
@@ -17,6 +32,13 @@ class BreweryDAO {
       })
   };
 
+  /**
+   *
+   *
+   * @param {*} id
+   * @returns
+   * @memberof BreweryDAO
+   */
   findById (id) {
     const sqlRequest = 'SELECT * FROM brewery WHERE id=$id'
     const sqlParams = { $id: id }
@@ -24,6 +46,13 @@ class BreweryDAO {
       .then(row => new Brewery(row))
   };
 
+  /**
+   *
+   *
+   * @param {*} catId
+   * @returns
+   * @memberof BreweryDAO
+   */
   findByCatId (catId) {
     const sqlRequest = 'SELECT * FROM brewery WHERE cat_id = ?'
     const sqlParams = [catId]
@@ -31,6 +60,13 @@ class BreweryDAO {
       .then(row => new Brewery(row))
   };
 
+  /**
+   *
+   *
+   * @param {*} brewery
+   * @returns
+   * @memberof BreweryDAO
+   */
   create (brewery) {
     const sqlRequest = 'INSERT INTO brewery(' +
             'id,breweries,address1,address2,city,state,code,country,phone,website,filepath,descript,last_mod,coordinates) ' +
@@ -55,12 +91,26 @@ class BreweryDAO {
     return this.common.run(sqlRequest, sqlParams)
   };
 
+  /**
+   *
+   *
+   * @param {*} id
+   * @returns
+   * @memberof BreweryDAO
+   */
   deleteById (id) {
     const sqlRequest = 'DELETE FROM brewery WHERE id=$id'
     const sqlParams = { $id: id }
     return this.common.run(sqlRequest, sqlParams)
   };
 
+  /**
+   *
+   *
+   * @param {*} brewery
+   * @returns
+   * @memberof BreweryDAO
+   */
   update (brewery) {
     const sqlRequest = 'UPDATE brewery SET ' +
             'breweries = $breweries, ' +
@@ -98,9 +148,12 @@ class BreweryDAO {
   };
 
   /**
-     *
-     * @param {Object} params
-     */
+   *
+   *
+   * @param {*} params
+   * @returns
+   * @memberof BreweryDAO
+   */
   search (params) {
     let sqlRequestLimit = ''
     let sqlRequestOffset = ''

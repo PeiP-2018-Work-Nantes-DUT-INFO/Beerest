@@ -1,3 +1,6 @@
+/**
+ *
+ */
 module.exports = {
   city: {
     in: ['query'],

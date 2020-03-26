@@ -6,6 +6,9 @@ const { checkSchema } = require('express-validator')
 const BreweryController = require('../../controller/breweryController')
 const breweryController = new BreweryController()
 
+/**
+ *
+ */
 const searchBrewery = require('./schemas/SearchBrewery')
 
 router.get('/', function (req, res) {

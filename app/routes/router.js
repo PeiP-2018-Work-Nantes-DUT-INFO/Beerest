@@ -6,6 +6,5 @@ router.use('/categorie', require('./api/categorieRoutes'))
 router.use('/beer', require('./api/beerRoutes'))
 
 router.use('/brewery', require('./api/breweryRoutes'))
-router.use('/test', require('./api/testRoutes'))
 
 module.exports = router

@@ -4,18 +4,36 @@ const Categorie = require('../model/categorie')
 /* Load Controller Common function */
 const ControllerCommon = require('./common/controllerCommon')
 
+/**
+ *
+ *
+ * @class CategorieController
+ */
 class CategorieController {
   constructor () {
     this.categorieDAO = new CategorieDAO()
     this.common = new ControllerCommon()
   }
 
+  /**
+   *
+   *
+   * @param {*} res
+   * @memberof CategorieController
+   */
   findAll (res) {
     this.categorieDAO.findAll()
       .then(this.common.findSuccess(res))
       .catch(this.common.findError(res))
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof CategorieController
+   */
   findById (req, res) {
     const id = req.params.id
     this.categorieDAO.findById(id)
@@ -23,6 +41,14 @@ class CategorieController {
       .catch(this.common.findError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof CategorieController
+   */
   create (req, res) {
     const categorie = new Categorie(req.body)
     return this.categorieDAO.create(categorie)
@@ -38,6 +64,13 @@ class CategorieController {
       .catch(this.common.serverError(res))
   }
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @memberof CategorieController
+   */
   deleteById (req, res) {
     const id = req.params.id
 
@@ -52,6 +85,14 @@ class CategorieController {
       .catch(this.common.serverError(res))
   };
 
+  /**
+   *
+   *
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof CategorieController
+   */
   update (req, res) {
     let categorie = new Categorie()
     /* categorie.id = req.body.id;
